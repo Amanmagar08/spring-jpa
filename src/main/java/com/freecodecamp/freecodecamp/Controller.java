@@ -28,15 +28,14 @@ public class Controller {
 
     @PostMapping("/students")
     public Student post(@RequestBody Student student) {
-        Integer schoolId = student.getSchool().getId();
+        Long schoolId = Long.valueOf(student.getSchool().getId());
 
-        School school = schoolRepository.findById(schoolId)
-                .orElseThrow(() -> new RuntimeException("School with ID " + schoolId + " not found"));
-
+        School school = schoolRepository.findById(student.getSchool().getId())
+                .orElseThrow(() -> new RuntimeException("School not found"));
         student.setSchool(school);
+
         return repository.save(student);
     }
-x
 
 
     @GetMapping("/students")

@@ -11,9 +11,13 @@ public class Student {
     @GeneratedValue
     @Column()
     private Integer id;
+    @Column()
     private String firstname;
+    @Column()
     private String lastname;
+    @Column()
     private String email;
+    @Column()
     private Integer age;
 
     // Map the entity with another entity(class)
@@ -29,7 +33,6 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
-    @JsonIgnore
     private School school;
 
 
