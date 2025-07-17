@@ -7,55 +7,57 @@ import jakarta.persistence.*;
 public class Student {
 
     // Declaring the Variables/Attributes
-    @Id
-    @GeneratedValue
-    @Column()
+    @Id                                             // Declares the attribute as the primary key
+    @GeneratedValue                                 // Value for the field is auto-generated
     private Integer id;
-    @Column()
     private String firstname;
-    @Column()
     private String lastname;
-    @Column()
     private String email;
-    @Column()
     private Integer age;
 
     // Map the entity with another entity(class)
-    @OneToOne(
-            mappedBy = "student",
-            cascade = CascadeType.ALL
+    @OneToOne(                                      // One-to-One relation with StudentProfile
+            mappedBy = "student",                   // Refers to the student field in StudentProfile class/entity
+            cascade = CascadeType.ALL               // Deleting a Student also deletes the associated StudentProfile
     )
-    private StudentProfile studentProfile;
+    private StudentProfile studentProfile;          // The associated StudentProfile of this Student
 
 
     // Map the entity with another entity(class)
-    @ManyToOne
-    @JoinColumn(
-            name = "school_id"
+    @ManyToOne                                      // Many-to-one relation with School
+    @JoinColumn(                                    // Specifies foreign key column for the relationship
+            name = "school_id"                      // Foreign key of the table referencing entity School's school
     )
     private School school;
 
 
     // Getters, Setters and Constructors
+
+    // No argument constructor(required for SpringJPA)
     public Student() {
     }
 
+    // Getter for studentProfile
     public StudentProfile getStudentProfile() {
         return studentProfile;
     }
 
+    // Setter for studentProfile
     public void setStudentProfile(StudentProfile studentProfile) {
         this.studentProfile = studentProfile;
     }
 
+    // Getter for school
     public School getSchool() {
         return school;
     }
 
+    // Setter of school
     public void setSchool(School school) {
         this.school = school;
     }
 
+    // Constructor
     public Student(String firstname, String lastname, String email, Integer age) {
         this.firstname = firstname;
         this.lastname = lastname;

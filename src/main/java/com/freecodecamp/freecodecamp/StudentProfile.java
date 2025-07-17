@@ -2,24 +2,23 @@ package com.freecodecamp.freecodecamp;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class StudentProfile {
 
-    // Declaring the Variables/Attributes
+    // Marks the field as the Primary key
     @Id
-    @GeneratedValue
+    @GeneratedValue         // The value for the field is auto-generated
     private Integer id;
     private String bio;
 
-    // Map the entity with another entity(class)
+    // Map the entity with another entity(class) with a one-to-one relation
     @OneToOne
-    @JoinColumn(
-            name = "student_id"
+    @JoinColumn(                        // Specifies the Foreign Key of the table
+            name = "student_id"         // Foreign key of the table referencing student field Student class
     )
     private Student student;
 
+    // No argument constructor as required for Spring JPA
     public Student getStudent() {
         return student;
     }
